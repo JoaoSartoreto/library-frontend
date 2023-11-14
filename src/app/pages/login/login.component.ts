@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { catchError, throwError } from 'rxjs';
+import { Subscription, catchError, throwError } from 'rxjs';
 import { AuthenticationService } from 'src/app/shared/authentication.service';
 import { MessagesService } from 'src/app/message/messages.service';
 
@@ -10,8 +10,9 @@ import { MessagesService } from 'src/app/message/messages.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   form!: FormGroup;
+  subscription: Subscription[] = [];
 
   constructor(
     private readonly fb: FormBuilder,
@@ -19,6 +20,9 @@ export class LoginComponent implements OnInit {
     private readonly authenticationService: AuthenticationService,
     private readonly messagesService: MessagesService
   ) {}
+  ngOnDestroy(): void {
+    this.subscription.forEach((sub) => sub.unsubscribe());
+  }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -31,7 +35,7 @@ export class LoginComponent implements OnInit {
     this.form.markAllAsTouched();
     if (this.form.valid) {
       const { email, password } = this.form.value;
-      this.authenticationService
+      const sub = this.authenticationService
         .login(email, password)
         .pipe(
           catchError((error) => {
@@ -46,6 +50,8 @@ export class LoginComponent implements OnInit {
             this.messagesService.error('E-mail ou senha inválidos!');
           }
         });
+
+      this.subscription.push(sub);
     } else {
       this.messagesService.error('Há campos inválidos no formulário!');
     }

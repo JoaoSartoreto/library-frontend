@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreateUser } from 'src/app/models/user.model';
 import { CriarContaService } from './criar-conta.service';
-import { catchError } from 'rxjs';
+import { Subscription, catchError } from 'rxjs';
 import { MessagesService } from 'src/app/message/messages.service';
 import { Router } from '@angular/router';
 
@@ -11,10 +11,11 @@ import { Router } from '@angular/router';
   templateUrl: './criar-conta.component.html',
   styleUrls: ['./criar-conta.component.scss'],
 })
-export class CriarContaComponent implements OnInit {
+export class CriarContaComponent implements OnInit, OnDestroy {
   form: FormGroup = new FormGroup({});
   desabilitar: boolean = true;
   isChecked: boolean = false;
+  subscription: Subscription[] = [];
 
   constructor(
     private readonly fb: FormBuilder,
@@ -22,6 +23,9 @@ export class CriarContaComponent implements OnInit {
     private readonly messageService: MessagesService,
     private readonly router: Router
   ) {}
+  ngOnDestroy(): void {
+    this.subscription.forEach((sub) => sub.unsubscribe());
+  }
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -44,18 +48,20 @@ export class CriarContaComponent implements OnInit {
         isLibrarian: this.isChecked,
       };
 
-      this.criarContaService
+      const sub = this.criarContaService
         .create(user)
         .pipe(
           catchError((err) => {
-            this.messageService.error('Usuário não pode ser cadastrada!');
+            this.messageService.error('Usuário não pode ser cadastrado!');
             return err;
           })
         )
         .subscribe((resp) => {
-          this.messageService.success('Usuário cadastrada com sucesso!');
+          this.messageService.success('Usuário cadastrado com sucesso!');
           this.router.navigate(['/login']);
         });
+
+      this.subscription.push(sub);
     } else {
       this.messageService.error('Há campos inválidos no formulário!');
     }

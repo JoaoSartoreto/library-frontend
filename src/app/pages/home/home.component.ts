@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, catchError } from 'rxjs';
 import { User } from 'src/app/models/user.model';
@@ -15,10 +15,11 @@ import { Router } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   user: User | null = null;
   form: FormGroup = new FormGroup({});
   desabilitar: boolean = true;
+  subscription: Subscription[] = [];
 
   constructor(
     private readonly router: Router,
@@ -29,6 +30,9 @@ export class HomeComponent implements OnInit {
     private readonly storageService: StorageService,
     private readonly dialog: MatDialog
   ) {}
+  ngOnDestroy(): void {
+    this.subscription.forEach((sub) => sub.unsubscribe());
+  }
 
   ngOnInit(): void {
     this.user = this.authService.getCurrentUserValue();
@@ -38,7 +42,7 @@ export class HomeComponent implements OnInit {
       password: [null, [Validators.minLength(8)]],
       confirmPassword: [null, [Validators.minLength(8)]],
       currentPassword: [null, [Validators.minLength(8), Validators.required]],
-      isLibrarian: [{ value: this.user?.isLibrarian, disabled: true }],
+      isLibrarian: [null],
     });
 
     this.atualizaFormulario();
@@ -67,36 +71,45 @@ export class HomeComponent implements OnInit {
       userSend.email = this.form.get('email')?.value;
       userSend.fullName = this.form.get('fullName')?.value;
       userSend.currentPassword = this.form.get('currentPassword')?.value;
+      userSend.isLibrarian = this.form.get('isLibrarian')?.value;
 
-      this.homeService.update(userSend).subscribe((usuario) => {
+      const sub = this.homeService.update(userSend).subscribe((usuario) => {
+        this.messageService.success('Usuário alterado com sucesso!');
         const currentUser: User = { ...this.user, ...usuario };
         this.user = currentUser;
         this.storageService.set('currentUser', this.user);
         this.atualizaFormulario();
       });
+
+      this.subscription.push(sub);
     }
   }
 
   atualizaFormulario() {
     this.form.reset();
+    if (this.user?.isLibrarian)
+      this.form.get('isLibrarian')?.setValue(this.user?.isLibrarian);
     this.form.patchValue({
       email: this.user?.email,
       fullName: this.user?.fullName,
-      isLibrarian: this.user?.isLibrarian,
     });
   }
 
   deletar() {
     const dialogRef = this.dialog.open(MessageComponent, {
-      data: `sua conta?`,
+      data: `Deseja mesmo excluir sua conta?`,
     });
-    dialogRef.afterClosed().subscribe((result) => {
+    const sub = dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.homeService.delete(this.user?.id).subscribe(() => {
+        const sub = this.homeService.delete(this.user?.id).subscribe(() => {
           this.messageService.success('Usuário excluído com sucesso!');
           this.router.navigate(['/login']);
         });
+
+        this.subscription.push(sub);
       }
     });
+
+    this.subscription.push(sub);
   }
 }

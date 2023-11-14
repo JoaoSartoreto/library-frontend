@@ -1,0 +1,83 @@
+<mat-card class="home mat-elevation-z3">
+    <mat-card-title class="title"> Bem vindo
+        <strong>{{user?.fullName}}</strong>!
+    </mat-card-title>
+
+    <form [formGroup]="form">
+        <mat-form-field appearance="outline">
+            <mat-label>Nome</mat-label>
+            <input
+                matInput
+                name="name"
+                placeholder="Nome"
+                formControlName="fullName"
+            />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input
+                matInput
+                name="email"
+                placeholder="Email"
+                formControlName="email"
+            />
+            <mat-error *ngIf="form.get('email')?.hasError('email')">
+                Campo deve ser um email.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Senha</mat-label>
+            <input
+                type="password"
+                matInput
+                name="password"
+                placeholder="Senha"
+                formControlName="password"
+            />
+            <mat-error *ngIf="form.get('password')?.hasError('minLength')">
+                Campo deve contem pelo menos 8 caracteres.
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Confirmação de senha</mat-label>
+            <input
+                type="password"
+                matInput
+                name="confirmPassword"
+                placeholder="Confirmação de senha"
+                formControlName="confirmPassword"
+            />
+            <mat-error *ngIf="form.get('confirmPassword')?.hasError('minLength')">
+                Campo deve contem pelo menos 8 caracteres.
+            </mat-error>
+        </mat-form-field>
+
+        <section class="example-section">
+            <mat-checkbox formControlName="isLibrarian" class="example-margin">Bibliotecario</mat-checkbox>
+        </section>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Confirmação de senha</mat-label>
+            <input
+                type="password"
+                matInput
+                name="currentPassword"
+                placeholder="Confirmação de senha"
+                formControlName="currentPassword"
+            />
+            <mat-error *ngIf="form.get('currentPassword')?.hasError('minLength') && form.get('currentPassword')?.hasError('required')">
+                Campo deve contem pelo menos 8 caracteres.
+            </mat-error>
+        </mat-form-field>
+  </form>
+
+    <div class="botoes">
+        <button mat-raised-button (click)="alterar()" color="primary">Alterar</button>
+        <button mat-raised-button [disabled]="desabilitar" (click)="confirmar()" #botaoConfirmar>Confirmar</button>
+        <button class="del" mat-raised-button (click)="deletar()" color="warn">Excluir</button>
+    </div>  
+
+</mat-card>

@@ -1,0 +1,22 @@
+.header {
+  display: flex;
+  align-items: center;
+  background-color: #4663ac;
+  justify-content: space-between;
+}
+
+.header a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+}
+
+.header .logo {
+  max-height: 50px;
+}
+
+button {
+  padding: 15px 30px;
+  font-size: large;
+}

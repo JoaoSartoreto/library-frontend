@@ -1,0 +1,50 @@
+.home {
+  .title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  background-color: #c8d9ed;
+}
+
+mat-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 7px;
+}
+mat-card-title {
+  padding-bottom: 15px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-form-field {
+  width: 70%;
+  height: 70px;
+}
+
+button {
+  width: 25%;
+  margin: 5px 5px 0;
+  padding: 23px;
+}
+
+.botoes {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.del {
+  width: 15%;
+  margin-right: 0;
+  margin-left: 500px;
+}

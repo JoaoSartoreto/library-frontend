@@ -1,30 +1,30 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, catchError } from 'rxjs';
-import { AuthorsService } from '../authors.service';
+import { CategoriesService } from '../categories.service';
 import { MessagesService } from 'src/app/message/messages.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-author-create',
-  templateUrl: './author-create.component.html',
-  styleUrls: ['./author-create.component.scss'],
+  selector: 'app-category-create',
+  templateUrl: './category-create.component.html',
+  styleUrls: ['./category-create.component.scss'],
 })
-export class AuthorCreateComponent implements OnInit, OnDestroy {
+export class CategoryCreateComponent implements OnInit, OnDestroy {
   form: FormGroup = new FormGroup({});
   desabilitar: boolean = true;
   subscription: Subscription[] = [];
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly authorsService: AuthorsService,
+    private readonly categoriesService: CategoriesService,
     private readonly messageService: MessagesService,
     private readonly router: Router
   ) {}
 
   ngOnInit() {
     this.form = this.fb.group({
-      fullName: [null, [Validators.required]],
+      name: [null, [Validators.required]],
     });
   }
 
@@ -35,19 +35,19 @@ export class AuthorCreateComponent implements OnInit, OnDestroy {
   salvar() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      const fullName = this.form.get('fullName')?.value;
+      const name = this.form.get('name')?.value;
 
-      const sub = this.authorsService
-        .create(fullName)
+      const sub = this.categoriesService
+        .create(name)
         .pipe(
           catchError((err) => {
-            this.messageService.error('Autor não pode ser cadastrado!');
+            this.messageService.error('Categoria não pode ser cadastrada!');
             return err;
           })
         )
         .subscribe((resp) => {
-          this.messageService.success('Autor cadastrado com sucesso!');
-          this.router.navigate(['/authors']);
+          this.messageService.success('Categoria cadastrada com sucesso!');
+          this.router.navigate(['/categories']);
         });
 
       this.subscription.push(sub);
@@ -57,6 +57,6 @@ export class AuthorCreateComponent implements OnInit, OnDestroy {
   }
 
   cancelar() {
-    this.router.navigate(['/authors']);
+    this.router.navigate(['/categories']);
   }
 }

@@ -1,32 +1,35 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Author } from 'src/app/models/author.model';
+import { Category } from 'src/app/models/category.model';
 import { ResponseDataList } from 'src/app/models/shared.model';
 import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root',
 })
-export class AuthorsService {
-  baseApi: string = '/authors';
+export class CategoriesService {
+  baseApi: string = '/categories';
 
   constructor(private readonly http: HttpClient) {}
 
-  create(fullName: string): Observable<Author> {
-    return this.http.post<Author>(environment.baseUrl + this.baseApi, {
-      fullName,
+  create(name: string): Observable<Category> {
+    return this.http.post<Category>(environment.baseUrl + this.baseApi, {
+      name,
     });
   }
 
-  findById(id: string): Observable<Author> {
-    return this.http.get<Author>(environment.baseUrl + this.baseApi + `/${id}`);
+  findById(id: string): Observable<Category> {
+    return this.http.get<Category>(
+      environment.baseUrl + this.baseApi + `/${id}`
+    );
   }
 
-  update(author: Author): Observable<Author> {
-    const fullName = author.fullName;
-    return this.http.patch<Author>(
-      environment.baseUrl + this.baseApi + `/${author.id}`,
-      { fullName }
+  update(category: Category): Observable<Category> {
+    const name = category.name;
+    return this.http.patch<Category>(
+      environment.baseUrl + this.baseApi + `/${category.id}`,
+      { name }
     );
   }
 
@@ -40,12 +43,12 @@ export class AuthorsService {
     page: number,
     limit: number,
     search?: string
-  ): Observable<ResponseDataList<Author>> {
+  ): Observable<ResponseDataList<Category>> {
     let params = new HttpParams().set('page', page).set('limit', limit);
     if (search?.trim()) {
       params = params.set('search', search.trim());
     }
-    return this.http.get<ResponseDataList<Author>>(
+    return this.http.get<ResponseDataList<Category>>(
       environment.baseUrl + this.baseApi,
       { params }
     );

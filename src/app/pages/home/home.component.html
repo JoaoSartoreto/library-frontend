@@ -68,7 +68,7 @@
                 placeholder="Confirmação de senha"
                 formControlName="currentPassword"
             />
-            <mat-error *ngIf="form.get('currentPassword')?.hasError('minLength') && form.get('currentPassword')?.hasError('required')">
+            <mat-error *ngIf="form.get('currentPassword')?.hasError('minLength') || form.get('currentPassword')?.hasError('required')">
                 Campo deve contem pelo menos 8 caracteres.
             </mat-error>
         </mat-form-field>

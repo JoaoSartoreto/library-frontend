@@ -35,6 +35,10 @@ import { AuthorsListComponent } from './pages/authors/authors-list/authors-list.
 import { AuthorInfoComponent } from './pages/authors/author-info/author-info.component';
 import { AuthorCreateComponent } from './pages/authors/author-create/author-create.component';
 import { AuthorEditComponent } from './pages/authors/author-edit/author-edit.component';
+import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
+import { CategoryEditComponent } from './pages/categories/category-edit/category-edit.component';
+import { CategoryInfoComponent } from './pages/categories/category-info/category-info.component';
+import { CategoryCreateComponent } from './pages/categories/category-create/category-create.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +55,10 @@ import { AuthorEditComponent } from './pages/authors/author-edit/author-edit.com
     AuthorInfoComponent,
     AuthorEditComponent,
     AuthorCreateComponent,
+    CategoriesListComponent,
+    CategoryEditComponent,
+    CategoryInfoComponent,
+    CategoryCreateComponent,
   ],
   imports: [
     MatDialogModule,

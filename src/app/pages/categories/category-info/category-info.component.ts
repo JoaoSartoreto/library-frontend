@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthorsService } from '../authors.service';
+import { CategoriesService } from '../categories.service';
 import { Subject, Subscription } from 'rxjs';
-import { Author } from 'src/app/models/author.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { Book } from 'src/app/models/book.model';
+import { Category } from 'src/app/models/category.model';
 
 @Component({
-  selector: 'app-author-info',
-  templateUrl: './author-info.component.html',
-  styleUrls: ['./author-info.component.scss'],
+  selector: 'app-category-info',
+  templateUrl: './category-info.component.html',
+  styleUrls: ['./category-info.component.scss'],
 })
-export class AuthorInfoComponent implements OnInit, OnDestroy {
+export class CategoryInfoComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   data: Book[] = [];
@@ -19,11 +19,11 @@ export class AuthorInfoComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   displayedColumns: string[] = ['id', 'title', 'year', 'edition'];
   refresh: Subject<boolean> = new Subject();
-  author: Author | null = null;
+  category: Category | null = null;
 
   constructor(
     private readonly router: Router,
-    private readonly authorsService: AuthorsService,
+    private readonly categoriesService: CategoriesService,
     private readonly route: ActivatedRoute
   ) {}
 
@@ -31,9 +31,9 @@ export class AuthorInfoComponent implements OnInit, OnDestroy {
     const sub1 = this.route.params.subscribe((params: any) => {
       const id = params['id'];
 
-      const sub = this.authorsService.findById(id).subscribe((author) => {
-        this.author = author;
-        this.data = this.author.books;
+      const sub = this.categoriesService.findById(id).subscribe((category) => {
+        this.category = category;
+        this.data = this.category.books;
         this.resultsLength = this.data.length;
       });
 
@@ -48,6 +48,6 @@ export class AuthorInfoComponent implements OnInit, OnDestroy {
   }
 
   voltar() {
-    this.router.navigate(['/authors']);
+    this.router.navigate(['/categories']);
   }
 }

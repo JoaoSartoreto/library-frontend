@@ -9,7 +9,7 @@ import { Category } from 'src/app/models/category.model';
 @Component({
   selector: 'app-category-edit',
   templateUrl: './category-edit.component.html',
-  styleUrls: ['./category-edit.component.css'],
+  styleUrls: ['./category-edit.component.scss'],
 })
 export class CategoryEditComponent implements OnInit, OnDestroy {
   form: FormGroup = new FormGroup({});

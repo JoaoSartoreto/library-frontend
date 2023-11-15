@@ -13,6 +13,10 @@ import { CategoriesListComponent } from './pages/categories/categories-list/cate
 import { CategoryEditComponent } from './pages/categories/category-edit/category-edit.component';
 import { CategoryInfoComponent } from './pages/categories/category-info/category-info.component';
 import { CategoryCreateComponent } from './pages/categories/category-create/category-create.component';
+import { TagsListComponent } from './pages/tags/tags-list/tags-list.component';
+import { TagsInfoComponent } from './pages/tags/tags-info/tags-info.component';
+import { TagsCreateComponent } from './pages/tags/tags-create/tags-create.component';
+import { TagsEditComponent } from './pages/tags/tags-edit/tags-edit.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -40,6 +44,15 @@ const routes: Routes = [
           { path: 'category-info/:id', component: CategoryInfoComponent },
           { path: 'category-create', component: CategoryCreateComponent },
           { path: ':id/edit', component: CategoryEditComponent },
+        ],
+      },
+      {
+        path: 'tags',
+        children: [
+          { path: '', component: TagsListComponent },
+          { path: 'tag-info/:id', component: TagsInfoComponent },
+          { path: 'tag-create', component: TagsCreateComponent },
+          { path: ':id/edit', component: TagsEditComponent },
         ],
       },
     ],

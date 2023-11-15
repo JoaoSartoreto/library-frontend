@@ -2,24 +2,24 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, catchError } from 'rxjs';
-import { AuthorsService } from '../authors.service';
+import { TagsService } from '../../tags.service';
 import { MessagesService } from 'src/app/message/messages.service';
-import { Author } from 'src/app/models/author.model';
+import { Tag } from 'src/app/models/tag.model';
 
 @Component({
-  selector: 'app-author-edit',
-  templateUrl: './author-edit.component.html',
-  styleUrls: ['./author-edit.component.scss'],
+  selector: 'app-tags-edit',
+  templateUrl: './tags-edit.component.html',
+  styleUrls: ['./tags-edit.component.scss'],
 })
-export class AuthorEditComponent implements OnInit, OnDestroy {
+export class TagsEditComponent implements OnInit, OnDestroy {
   form: FormGroup = new FormGroup({});
   desabilitar: boolean = true;
   subscription: Subscription[] = [];
-  author!: Author;
+  tag!: Tag;
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly authorsService: AuthorsService,
+    private readonly tagsService: TagsService,
     private readonly messageService: MessagesService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
@@ -27,17 +27,17 @@ export class AuthorEditComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.form = this.fb.group({
-      fullName: [null, [Validators.required]],
+      name: [null, [Validators.required]],
     });
 
     const sub = this.route.params.subscribe((params: any) => {
       const id = params['id'];
 
-      const sub = this.authorsService.findById(id).subscribe((author) => {
-        this.author = author;
+      const sub = this.tagsService.findById(id).subscribe((tag) => {
+        this.tag = tag;
 
         this.form.patchValue({
-          fullName: this.author.fullName,
+          name: this.tag.name,
         });
       });
 
@@ -54,19 +54,19 @@ export class AuthorEditComponent implements OnInit, OnDestroy {
   salvar() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      this.author.fullName = this.form.get('fullName')?.value;
+      this.tag.name = this.form.get('name')?.value;
 
-      const sub = this.authorsService
-        .update(this.author)
+      const sub = this.tagsService
+        .update(this.tag)
         .pipe(
           catchError((err) => {
-            this.messageService.error('Autor não pode ser atualizado!');
+            this.messageService.error('Tag não pode ser atualizada!');
             return err;
           })
         )
         .subscribe((resp) => {
-          this.messageService.success('Autor atualizado com sucesso!');
-          this.router.navigate(['/authors']);
+          this.messageService.success('Tag atualizada com sucesso!');
+          this.router.navigate(['/tags']);
         });
 
       this.subscription.push(sub);
@@ -76,6 +76,6 @@ export class AuthorEditComponent implements OnInit, OnDestroy {
   }
 
   cancelar() {
-    this.router.navigate(['/authors']);
+    this.router.navigate(['/tags']);
   }
 }

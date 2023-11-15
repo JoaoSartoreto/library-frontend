@@ -5,6 +5,10 @@ import { PageComponent } from './layout/page/page.component';
 import { AuthenticationGuard } from './guards/authentication.guard';
 import { HomeComponent } from './pages/home/home.component';
 import { CriarContaComponent } from './pages/criar-conta/criar-conta.component';
+import { AuthorsListComponent } from './pages/authors/authors-list/authors-list.component';
+import { AuthorInfoComponent } from './pages/authors/author-info/author-info.component';
+import { AuthorCreateComponent } from './pages/authors/author-create/author-create.component';
+import { AuthorEditComponent } from './pages/authors/author-edit/author-edit.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -14,7 +18,18 @@ const routes: Routes = [
     component: PageComponent,
     canActivate: [AuthenticationGuard],
     canActivateChild: [AuthenticationGuard],
-    children: [{ path: '', component: HomeComponent }],
+    children: [
+      { path: '', component: HomeComponent },
+      {
+        path: 'authors',
+        children: [
+          { path: '', component: AuthorsListComponent },
+          { path: 'author-info/:id', component: AuthorInfoComponent },
+          { path: 'author-create', component: AuthorCreateComponent },
+          { path: ':id/edit', component: AuthorEditComponent },
+        ],
+      },
+    ],
   },
 ];
 

@@ -31,6 +31,10 @@ import { NavComponent } from './layout/nav/nav.component';
 import { HomeComponent } from './pages/home/home.component';
 import { CriarContaComponent } from './pages/criar-conta/criar-conta.component';
 import { MessageComponent } from './message/message.component';
+import { AuthorsListComponent } from './pages/authors/authors-list/authors-list.component';
+import { AuthorInfoComponent } from './pages/authors/author-info/author-info.component';
+import { AuthorCreateComponent } from './pages/authors/author-create/author-create.component';
+import { AuthorEditComponent } from './pages/authors/author-edit/author-edit.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +47,10 @@ import { MessageComponent } from './message/message.component';
     HomeComponent,
     CriarContaComponent,
     MessageComponent,
+    AuthorsListComponent,
+    AuthorInfoComponent,
+    AuthorEditComponent,
+    AuthorCreateComponent,
   ],
   imports: [
     MatDialogModule,

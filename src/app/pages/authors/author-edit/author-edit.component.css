@@ -10,20 +10,24 @@
   }
 
   background-color: #c8d9ed;
-}
-
-mat-card {
   display: flex;
   flex-direction: column;
-  padding: 7px;
+  justify-content: center;
+  margin: 40px 40px;
+  padding: 25px;
 }
+
 mat-card-title {
   padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 form {
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 mat-form-field {
@@ -39,11 +43,5 @@ button {
 
 .botoes {
   display: flex;
-  justify-content: flex-start;
-}
-
-.del {
-  width: 15%;
-  margin-right: 0;
-  margin-left: 70%;
+  justify-content: center;
 }

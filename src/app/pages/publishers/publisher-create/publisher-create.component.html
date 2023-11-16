@@ -1,0 +1,39 @@
+<mat-card class="home mat-elevation-z3">
+    <mat-card-title class="title">
+        <strong>Cadastro de Categoria</strong>
+    </mat-card-title>
+
+    <form [formGroup]="form">
+        <mat-form-field appearance="outline">
+            <mat-label>Nome</mat-label>
+            <input
+                matInput
+                name="name"
+                placeholder="Nome"
+                formControlName="name"
+            />
+            <mat-error *ngIf="form.get('name')?.hasError('required')">
+                Campo obrigatório
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>País</mat-label>
+            <input
+                matInput
+                name="country"
+                placeholder="País"
+                formControlName="country"
+            />
+            <mat-error *ngIf="form.get('country')?.hasError('required')">
+                Campo obrigatório
+            </mat-error>
+        </mat-form-field>
+  </form>
+
+    <div class="botoes">
+        <button mat-raised-button (click)="salvar()" color="primary">Salvar</button>
+        <button mat-raised-button (click)="cancelar()" color="warn">Cancelar</button>
+    </div>  
+
+</mat-card>

@@ -21,6 +21,10 @@ import { BibliographysListComponent } from './pages/bibliographys/bibliographys-
 import { BibliographysInfoComponent } from './pages/bibliographys/bibliographys-info/bibliographys-info.component';
 import { BibliographysCreateComponent } from './pages/bibliographys/bibliographys-create/bibliographys-create.component';
 import { BibliographysEditComponent } from './pages/bibliographys/bibliographys-edit/bibliographys-edit.component';
+import { PublishersListComponent } from './pages/publishers/publishers-list/publishers-list.component';
+import { PublisherInfoComponent } from './pages/publishers/publisher-info/publisher-info.component';
+import { PublisherCreateComponent } from './pages/publishers/publisher-create/publisher-create.component';
+import { PublisherEditComponent } from './pages/publishers/publisher-edit/publisher-edit.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -72,6 +76,21 @@ const routes: Routes = [
             component: BibliographysCreateComponent,
           },
           { path: ':id/edit', component: BibliographysEditComponent },
+        ],
+      },
+      {
+        path: 'publishers',
+        children: [
+          { path: '', component: PublishersListComponent },
+          {
+            path: 'publisher-info/:id',
+            component: PublisherInfoComponent,
+          },
+          {
+            path: 'publisher-create',
+            component: PublisherCreateComponent,
+          },
+          { path: ':id/edit', component: PublisherEditComponent },
         ],
       },
     ],

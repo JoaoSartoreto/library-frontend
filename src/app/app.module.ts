@@ -48,6 +48,10 @@ import { BibliographysListComponent } from './pages/bibliographys/bibliographys-
 import { BibliographysInfoComponent } from './pages/bibliographys/bibliographys-info/bibliographys-info.component';
 import { BibliographysCreateComponent } from './pages/bibliographys/bibliographys-create/bibliographys-create.component';
 import { BibliographysEditComponent } from './pages/bibliographys/bibliographys-edit/bibliographys-edit.component';
+import { PublishersListComponent } from './pages/publishers/publishers-list/publishers-list.component';
+import { PublisherCreateComponent } from './pages/publishers/publisher-create/publisher-create.component';
+import { PublisherEditComponent } from './pages/publishers/publisher-edit/publisher-edit.component';
+import { PublisherInfoComponent } from './pages/publishers/publisher-info/publisher-info.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +80,10 @@ import { BibliographysEditComponent } from './pages/bibliographys/bibliographys-
     BibliographysInfoComponent,
     BibliographysCreateComponent,
     BibliographysEditComponent,
+    PublishersListComponent,
+    PublisherCreateComponent,
+    PublisherEditComponent,
+    PublisherInfoComponent,
   ],
   imports: [
     MatDialogModule,

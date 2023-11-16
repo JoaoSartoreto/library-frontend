@@ -5,3 +5,8 @@ export interface Bibliography {
   description: string;
   books: Book[];
 }
+
+export interface BibliographyDto {
+  description: string;
+  bookIds: string[];
+}

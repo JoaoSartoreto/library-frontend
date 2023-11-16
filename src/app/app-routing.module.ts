@@ -17,6 +17,10 @@ import { TagsListComponent } from './pages/tags/tags-list/tags-list.component';
 import { TagsInfoComponent } from './pages/tags/tags-info/tags-info.component';
 import { TagsCreateComponent } from './pages/tags/tags-create/tags-create.component';
 import { TagsEditComponent } from './pages/tags/tags-edit/tags-edit.component';
+import { BibliographysListComponent } from './pages/bibliographys/bibliographys-list/bibliographys-list.component';
+import { BibliographysInfoComponent } from './pages/bibliographys/bibliographys-info/bibliographys-info.component';
+import { BibliographysCreateComponent } from './pages/bibliographys/bibliographys-create/bibliographys-create.component';
+import { BibliographysEditComponent } from './pages/bibliographys/bibliographys-edit/bibliographys-edit.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -53,6 +57,21 @@ const routes: Routes = [
           { path: 'tag-info/:id', component: TagsInfoComponent },
           { path: 'tag-create', component: TagsCreateComponent },
           { path: ':id/edit', component: TagsEditComponent },
+        ],
+      },
+      {
+        path: 'bibliographys',
+        children: [
+          { path: '', component: BibliographysListComponent },
+          {
+            path: 'bibliography-info/:id',
+            component: BibliographysInfoComponent,
+          },
+          {
+            path: 'bibliography-create',
+            component: BibliographysCreateComponent,
+          },
+          { path: ':id/edit', component: BibliographysEditComponent },
         ],
       },
     ],

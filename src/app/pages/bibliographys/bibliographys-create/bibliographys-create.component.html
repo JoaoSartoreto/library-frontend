@@ -1,0 +1,53 @@
+<mat-card class="home mat-elevation-z3">
+    <mat-card-title class="title">
+        <strong>Cadastro de Autor</strong>
+    </mat-card-title>
+
+    <form [formGroup]="form">
+        <mat-form-field appearance="outline">
+            <mat-label>Descrição</mat-label>
+            <input
+                matInput
+                name="description"
+                placeholder="Descrição"
+                formControlName="description"
+            />
+            <mat-error *ngIf="form.get('description')?.hasError('required')">
+                Campo obrigatório
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>ID Livro</mat-label>
+            <input
+                matInput
+                name="bookId"
+                placeholder="ID Livro"
+                formControlName="bookId"
+            />
+            <mat-error *ngIf="form.get('bookId')?.hasError('required')">
+                Campo obrigatório
+            </mat-error>
+        </mat-form-field>
+
+        <div formArrayName="bookIds" class="idsBooks">
+            <div *ngFor="let bookId of bookIdsFormArray.controls; let i = index">
+                <mat-form-field appearance="outline">
+                    <mat-label>ID do Livro {{ i + 2 }}</mat-label>
+                    <input matInput [formControlName]="i"/>
+                </mat-form-field>
+                <button mat-icon-button color="warn" (click)="removeBookIdInput(i)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <button mat-raised-button color="primary" (click)="addBookIdInput()">Adicionar mais Livros</button>
+  </form>
+
+    <div class="botoes">
+        <button mat-raised-button (click)="salvar()" color="primary">Salvar</button>
+        <button mat-raised-button (click)="cancelar()" color="warn">Cancelar</button>
+    </div>  
+
+</mat-card>

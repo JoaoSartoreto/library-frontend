@@ -16,6 +16,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatIconModule } from '@angular/material/icon';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -43,6 +44,10 @@ import { TagsListComponent } from './pages/tags/tags-list/tags-list.component';
 import { TagsInfoComponent } from './pages/tags/tags-info/tags-info.component';
 import { TagsCreateComponent } from './pages/tags/tags-create/tags-create.component';
 import { TagsEditComponent } from './pages/tags/tags-edit/tags-edit.component';
+import { BibliographysListComponent } from './pages/bibliographys/bibliographys-list/bibliographys-list.component';
+import { BibliographysInfoComponent } from './pages/bibliographys/bibliographys-info/bibliographys-info.component';
+import { BibliographysCreateComponent } from './pages/bibliographys/bibliographys-create/bibliographys-create.component';
+import { BibliographysEditComponent } from './pages/bibliographys/bibliographys-edit/bibliographys-edit.component';
 
 @NgModule({
   declarations: [
@@ -67,6 +72,10 @@ import { TagsEditComponent } from './pages/tags/tags-edit/tags-edit.component';
     TagsInfoComponent,
     TagsCreateComponent,
     TagsEditComponent,
+    BibliographysListComponent,
+    BibliographysInfoComponent,
+    BibliographysCreateComponent,
+    BibliographysEditComponent,
   ],
   imports: [
     MatDialogModule,
@@ -89,6 +98,7 @@ import { TagsEditComponent } from './pages/tags/tags-edit/tags-edit.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MatIconModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtAuthInterceptor, multi: true },

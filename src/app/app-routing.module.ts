@@ -25,6 +25,10 @@ import { PublishersListComponent } from './pages/publishers/publishers-list/publ
 import { PublisherInfoComponent } from './pages/publishers/publisher-info/publisher-info.component';
 import { PublisherCreateComponent } from './pages/publishers/publisher-create/publisher-create.component';
 import { PublisherEditComponent } from './pages/publishers/publisher-edit/publisher-edit.component';
+import { BooksListComponent } from './pages/books/books-list/books-list.component';
+import { BookInfoComponent } from './pages/books/book-info/book-info.component';
+import { BookCreateComponent } from './pages/books/book-create/book-create.component';
+import { BookEditComponent } from './pages/books/book-edit/book-edit.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -91,6 +95,15 @@ const routes: Routes = [
             component: PublisherCreateComponent,
           },
           { path: ':id/edit', component: PublisherEditComponent },
+        ],
+      },
+      {
+        path: 'books',
+        children: [
+          { path: '', component: BooksListComponent },
+          { path: 'book-info/:id', component: BookInfoComponent },
+          { path: 'book-create', component: BookCreateComponent },
+          { path: ':id/edit', component: BookEditComponent },
         ],
       },
     ],

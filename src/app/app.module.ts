@@ -52,6 +52,10 @@ import { PublishersListComponent } from './pages/publishers/publishers-list/publ
 import { PublisherCreateComponent } from './pages/publishers/publisher-create/publisher-create.component';
 import { PublisherEditComponent } from './pages/publishers/publisher-edit/publisher-edit.component';
 import { PublisherInfoComponent } from './pages/publishers/publisher-info/publisher-info.component';
+import { BooksListComponent } from './pages/books/books-list/books-list.component';
+import { BookCreateComponent } from './pages/books/book-create/book-create.component';
+import { BookEditComponent } from './pages/books/book-edit/book-edit.component';
+import { BookInfoComponent } from './pages/books/book-info/book-info.component';
 
 @NgModule({
   declarations: [
@@ -84,6 +88,10 @@ import { PublisherInfoComponent } from './pages/publishers/publisher-info/publis
     PublisherCreateComponent,
     PublisherEditComponent,
     PublisherInfoComponent,
+    BooksListComponent,
+    BookCreateComponent,
+    BookEditComponent,
+    BookInfoComponent,
   ],
   imports: [
     MatDialogModule,

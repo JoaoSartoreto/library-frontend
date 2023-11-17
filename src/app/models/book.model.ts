@@ -22,3 +22,16 @@ export interface Book {
   reserves: Reserve[];
   borrowings: Borrowing[];
 }
+
+export interface BookDto {
+  isbn: string;
+  title: string;
+  language: string;
+  year: number;
+  edition: number;
+  quantity: number;
+  authorIds: string[];
+  tagIds: string[];
+  categoryIds: string[];
+  publisherId: string;
+}

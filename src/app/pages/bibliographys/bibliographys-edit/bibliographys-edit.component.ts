@@ -4,7 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, catchError } from 'rxjs';
 import { BibliographysService } from '../bibliographys.service';
 import { MessagesService } from 'src/app/message/messages.service';
-import { Bibliography } from 'src/app/models/bibliography.model';
+import {
+  Bibliography,
+  BibliographyDto,
+} from 'src/app/models/bibliography.model';
 
 @Component({
   selector: 'app-bibliographys-edit',
@@ -28,6 +31,7 @@ export class BibliographysEditComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.form = this.fb.group({
       description: [null, [Validators.required]],
+      bookId: [null, [Validators.required]],
       bookIds: this.fb.array([]),
     });
 
@@ -41,10 +45,11 @@ export class BibliographysEditComponent implements OnInit, OnDestroy {
 
           this.form.patchValue({
             description: this.bibliography.description,
+            bookId: this.bibliography.books[0].id,
           });
 
           if (this.bibliography.books && this.bibliography.books.length > 0) {
-            this.bibliography.books.forEach((book) => {
+            this.bibliography.books.slice(1).forEach((book) => {
               this.addBookIdInput(book.id);
             });
           }
@@ -63,9 +68,13 @@ export class BibliographysEditComponent implements OnInit, OnDestroy {
   salvar() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      const description = this.form.get('description')?.value;
-      const bookIds = this.getFilledValues();
-      const bibli = { description, bookIds };
+      const description: string = this.form.get('description')?.value;
+      const bookId: string = this.form.get('bookId')?.value;
+      const book: string[] = this.getFilledValues();
+
+      const bookIds: string[] = [bookId, ...book];
+
+      const bibli: BibliographyDto = { description, bookIds };
 
       const sub = this.bibliographysService
         .update(this.bibliography.id, bibli)

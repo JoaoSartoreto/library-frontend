@@ -1,0 +1,68 @@
+.title {
+  font-size: 1.8rem;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.title2 {
+  font-size: 1.3rem;
+  font-weight: 300;
+  line-height: 1.5;
+}
+
+.container-table {
+  margin-top: 2rem;
+  position: relative;
+
+  table {
+    width: 100%;
+  }
+
+  .loading-shade {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 56px;
+    background-color: rgba($color: #000000, $alpha: 0.15);
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .Titulo1 {
+    font-size: 1.5rem;
+    font-weight: 300;
+    line-height: 1;
+  }
+}
+
+.mat-column-id {
+  max-width: 150px;
+}
+
+p {
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 1;
+}
+
+button {
+  width: 25%;
+  margin: 10px;
+  padding: 23px;
+  margin-left: 70%;
+}
+
+mat-card {
+  background-color: #c8d9ed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.tabela-container {
+  margin-bottom: 10px;
+}

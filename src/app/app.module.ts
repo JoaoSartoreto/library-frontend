@@ -1,4 +1,5 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -56,6 +57,13 @@ import { BooksListComponent } from './pages/books/books-list/books-list.componen
 import { BookCreateComponent } from './pages/books/book-create/book-create.component';
 import { BookEditComponent } from './pages/books/book-edit/book-edit.component';
 import { BookInfoComponent } from './pages/books/book-info/book-info.component';
+import { ReservesListComponent } from './pages/reserves/reserves-list/reserves-list.component';
+import { ReserveCreateComponent } from './pages/reserves/reserve-create/reserve-create.component';
+import { ReserveEditComponent } from './pages/reserves/reserve-edit/reserve-edit.component';
+import { registerLocaleData } from '@angular/common';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt);
 
 @NgModule({
   declarations: [
@@ -92,6 +100,9 @@ import { BookInfoComponent } from './pages/books/book-info/book-info.component';
     BookCreateComponent,
     BookEditComponent,
     BookInfoComponent,
+    ReservesListComponent,
+    ReserveCreateComponent,
+    ReserveEditComponent,
   ],
   imports: [
     MatDialogModule,
@@ -115,6 +126,7 @@ import { BookInfoComponent } from './pages/books/book-info/book-info.component';
     BrowserAnimationsModule,
     HttpClientModule,
     MatIconModule,
+    CommonModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtAuthInterceptor, multi: true },

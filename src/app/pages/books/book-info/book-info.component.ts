@@ -37,7 +37,6 @@ export class BookInfoComponent implements OnInit, OnDestroy {
 
       const sub = this.booksService.findById(id).subscribe((book) => {
         this.book = book;
-        console.log(this.book);
         this.data1 = this.book.authors;
         this.data2 = this.book.tags;
         this.data3 = this.book.categories;

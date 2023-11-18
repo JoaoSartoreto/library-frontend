@@ -29,6 +29,9 @@ import { BooksListComponent } from './pages/books/books-list/books-list.componen
 import { BookInfoComponent } from './pages/books/book-info/book-info.component';
 import { BookCreateComponent } from './pages/books/book-create/book-create.component';
 import { BookEditComponent } from './pages/books/book-edit/book-edit.component';
+import { ReservesListComponent } from './pages/reserves/reserves-list/reserves-list.component';
+import { ReserveCreateComponent } from './pages/reserves/reserve-create/reserve-create.component';
+import { ReserveEditComponent } from './pages/reserves/reserve-edit/reserve-edit.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -104,6 +107,14 @@ const routes: Routes = [
           { path: 'book-info/:id', component: BookInfoComponent },
           { path: 'book-create', component: BookCreateComponent },
           { path: ':id/edit', component: BookEditComponent },
+        ],
+      },
+      {
+        path: 'reserves',
+        children: [
+          { path: '', component: ReservesListComponent },
+          { path: 'reserve-create', component: ReserveCreateComponent },
+          { path: ':id/edit', component: ReserveEditComponent },
         ],
       },
     ],

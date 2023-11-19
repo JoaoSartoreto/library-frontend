@@ -62,6 +62,9 @@ import { ReserveCreateComponent } from './pages/reserves/reserve-create/reserve-
 import { ReserveEditComponent } from './pages/reserves/reserve-edit/reserve-edit.component';
 import { registerLocaleData } from '@angular/common';
 import localePt from '@angular/common/locales/pt';
+import { BorrowingsListComponent } from './pages/borrowings/borrowings-list/borrowings-list.component';
+import { BorrowingCreateComponent } from './pages/borrowings/borrowing-create/borrowing-create.component';
+import { FinesListComponent } from './pages/fines/fines-list/fines-list.component';
 
 registerLocaleData(localePt);
 
@@ -103,6 +106,9 @@ registerLocaleData(localePt);
     ReservesListComponent,
     ReserveCreateComponent,
     ReserveEditComponent,
+    BorrowingsListComponent,
+    BorrowingCreateComponent,
+    FinesListComponent,
   ],
   imports: [
     MatDialogModule,

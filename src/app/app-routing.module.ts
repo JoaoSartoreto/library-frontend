@@ -32,6 +32,9 @@ import { BookEditComponent } from './pages/books/book-edit/book-edit.component';
 import { ReservesListComponent } from './pages/reserves/reserves-list/reserves-list.component';
 import { ReserveCreateComponent } from './pages/reserves/reserve-create/reserve-create.component';
 import { ReserveEditComponent } from './pages/reserves/reserve-edit/reserve-edit.component';
+import { BorrowingsListComponent } from './pages/borrowings/borrowings-list/borrowings-list.component';
+import { BorrowingCreateComponent } from './pages/borrowings/borrowing-create/borrowing-create.component';
+import { FinesListComponent } from './pages/fines/fines-list/fines-list.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -116,6 +119,17 @@ const routes: Routes = [
           { path: 'reserve-create', component: ReserveCreateComponent },
           { path: ':id/edit', component: ReserveEditComponent },
         ],
+      },
+      {
+        path: 'borrowings',
+        children: [
+          { path: '', component: BorrowingsListComponent },
+          { path: 'borrowing-create', component: BorrowingCreateComponent },
+        ],
+      },
+      {
+        path: 'fines',
+        children: [{ path: '', component: FinesListComponent }],
       },
     ],
   },

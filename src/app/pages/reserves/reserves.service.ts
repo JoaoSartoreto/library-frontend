@@ -5,6 +5,11 @@ import { Reserve, ReserveDto } from 'src/app/models/reserve.model';
 import { ResponseDataList } from 'src/app/models/shared.model';
 import { environment } from 'src/environments/environment';
 
+import dayjs from 'dayjs';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
+
+dayjs.extend(customParseFormat);
+
 @Injectable({
   providedIn: 'root',
 })
@@ -45,16 +50,10 @@ export class ReservesService {
   ): Observable<ResponseDataList<Reserve>> {
     let params = new HttpParams().set('page', page).set('limit', limit);
     if (startingDateMin) {
-      params = params.set(
-        'startingDateMin',
-        startingDateMin.toLocaleDateString()
-      );
+      params = params.set('startingDateMin', startingDateMin.toISOString());
     }
     if (startingDateMax) {
-      params = params.set(
-        'startingDateMax',
-        startingDateMax.toLocaleDateString()
-      );
+      params = params.set('startingDateMax', startingDateMax.toISOString());
     }
     if (onlyValid === 'Validas') {
       params = params.set('onlyValid', 'true');
@@ -68,60 +67,32 @@ export class ReservesService {
   }
 
   public convertStringToDate(dateString: string): Date | null {
-    if (dateString && dateString !== '') {
-      const dateParts = dateString.split('/');
+    try {
+      const date = dayjs(dateString, 'DD/MM/YYYY');
 
-      if (dateParts.length === 3) {
-        const day = parseInt(dateParts[0], 10);
-        const month = parseInt(dateParts[1], 10) - 1; // Mês começa do zero (0 a 11)
-        const year = parseInt(dateParts[2], 10);
+      if (!date.isValid()) return null;
 
-        // Verifica se é uma data válida
-        const testDate = new Date(year, month, day);
-        if (
-          testDate.getDate() === day &&
-          testDate.getMonth() === month &&
-          testDate.getFullYear() === year
-        ) {
-          return testDate; // Retorna a data válida no formato Date
-        }
-      }
+      return date.toDate();
+    } catch (error) {
+      return null; // Retorna null se a string não for uma data válida no formato DD/MM/YYYY
     }
-    return null; // Retorna null se a string não for uma data válida no formato DD/MM/YYYY
   }
 
   public convertStringDtToDate(dateString: string): Date | null {
-    if (dateString && dateString !== '') {
-      const dateTimeParts = dateString.split(' ');
-      if (dateTimeParts.length === 2) {
-        const date = dateTimeParts[0];
-        const time = dateTimeParts[1];
+    try {
+      const date = dayjs(dateString, 'DD/MM/YYYY HH:mm');
 
-        const dateParts = date.split('/');
-        const timeParts = time.split(':');
+      if (!date.isValid()) return null;
 
-        if (dateParts.length === 3 && timeParts.length === 2) {
-          const day = parseInt(dateParts[0], 10);
-          const month = parseInt(dateParts[1], 10) - 1; // Mês começa do zero (0 a 11)
-          const year = parseInt(dateParts[2], 10); // Ano de 4 dígitos
-
-          const hour = parseInt(timeParts[0], 10);
-          const minute = parseInt(timeParts[1], 10);
-
-          // Verifica se é uma data e hora válidas
-          const testDate = new Date(year, month, day, hour, minute);
-          if (
-            testDate.getDate() === day &&
-            testDate.getMonth() === month &&
-            testDate.getFullYear() === year &&
-            testDate.getHours() === hour &&
-            testDate.getMinutes() === minute
-          ) {
-            return testDate; // Retorna a data e hora válidas no formato Date
-          }
-        }
-      }
+      return date.toDate();
+    } catch (error) {
+      return null; // Retorna null se a string não for uma data válida no formato DD/MM/YYYY
     }
-    return null; // Retorna null se a string não for uma data e hora válidas no formato DD/MM/YYYY HH:mm
+  }
+
+  converterData(dataOriginal: Date) {
+    // Converter para o formato desejado (DD/MM/YYYY HH:mm)
+    const dataConvertida = dayjs(dataOriginal).format('DD/MM/YYYY HH:mm');
+    return dataConvertida;
   }
 }

@@ -11,8 +11,8 @@ export interface Reserve {
 }
 
 export interface ReserveDto {
-  startDate?: Date;
-  endDate?: Date;
+  startDate?: string;
+  endDate?: string;
   isValid?: boolean;
   bookId: string;
 }

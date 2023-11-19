@@ -1,1 +1,58 @@
-<p>reserve-edit works!</p>
+<mat-card class="home mat-elevation-z3">
+    <mat-card-title class="title">
+        <strong>Atualização de Reserva</strong>
+    </mat-card-title>
+
+    <form [formGroup]="form">
+        <mat-form-field appearance="outline">
+            <mat-label>Data inicio</mat-label>
+            <input
+                matInput
+                name="startDate"
+                placeholder="Data inicio"
+                formControlName="startDate"
+            />
+            <mat-error *ngIf="form.get('startDate')?.hasError('required')">
+                Campo obrigatório
+            </mat-error>
+            <mat-error *ngIf="form.get('startDate')?.hasError('invalidDateTime')">
+                Data: (DD/MM/YYYY HH:mm)
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Data fim</mat-label>
+            <input
+                matInput
+                name="endDate"
+                placeholder="Data fim"
+                formControlName="endDate"
+            />
+            <mat-error *ngIf="form.get('endDate')?.hasError('required')">
+                Campo obrigatório
+            </mat-error>
+            <mat-error *ngIf="form.get('endDate')?.hasError('invalidDateTime')">
+                Data: (DD/MM/YYYY HH:mm)
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Id Livro</mat-label>
+            <input
+                matInput
+                name="bookId"
+                placeholder="Id Livro"
+                formControlName="bookId"
+            />
+            <mat-error *ngIf="form.get('bookId')?.hasError('required')">
+                Campo obrigatório
+            </mat-error>
+        </mat-form-field>
+  </form>
+
+    <div class="botoes">
+        <button mat-raised-button (click)="salvar()" color="primary">Salvar</button>
+        <button mat-raised-button (click)="cancelar()" color="warn">Cancelar</button>
+    </div>  
+
+</mat-card>

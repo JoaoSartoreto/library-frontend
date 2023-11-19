@@ -13,7 +13,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 40px 40px;
+  margin: 32px 32px;
   padding: 25px;
 }
 
@@ -33,6 +33,12 @@ form {
 mat-form-field {
   width: 70%;
   height: 70px;
+  margin-bottom: 25px;
+}
+
+mat-error {
+  margin: 0;
+  padding: 0;
 }
 
 button {

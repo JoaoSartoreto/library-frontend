@@ -39,17 +39,20 @@ export class ReserveCreateComponent implements OnInit, OnDestroy {
   salvar() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      const startDate = this.reservesService.convertStringDtToDate(
-        this.form.get('startDate')?.value
-      );
-      const endDate = this.reservesService.convertStringDtToDate(
-        this.form.get('endDate')?.value
-      );
+      const startDate = this.reservesService
+        .convertStringDtToDate(this.form.get('startDate')?.value)
+        ?.toString();
+      const endDate = this.reservesService
+        .convertStringDtToDate(this.form.get('endDate')?.value)
+        ?.toString();
       const bookId = this.form.get('bookId')?.value;
-      console.log(endDate);
 
       if (startDate && endDate) {
-        const reserve: ReserveDto = { startDate, endDate, bookId };
+        const reserve: ReserveDto = {
+          startDate,
+          endDate,
+          bookId,
+        };
         const sub = this.reservesService
           .create(reserve)
           .pipe(

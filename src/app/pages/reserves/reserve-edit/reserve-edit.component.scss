@@ -1,0 +1,53 @@
+.home {
+  .title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+  }
+
+  background-color: #c8d9ed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 32px 32px;
+  padding: 25px;
+}
+
+mat-card-title {
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+mat-form-field {
+  width: 70%;
+  height: 70px;
+  margin-bottom: 25px;
+}
+
+mat-error {
+  margin: 0;
+  padding: 0;
+}
+
+button {
+  width: 25%;
+  margin: 5px 5px 0;
+  padding: 23px;
+}
+
+.botoes {
+  display: flex;
+  justify-content: center;
+}

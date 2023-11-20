@@ -4,12 +4,21 @@ import { BibliographysListComponent } from './bibliographys-list/bibliographys-l
 import { BibliographyInfoComponent } from './bibliography-info/bibliography-info.component';
 import { BibliographyCreateComponent } from './bibliography-create/bibliography-create.component';
 import { BibliographyEditComponent } from './bibliography-edit/bibliography-edit.component';
+import { LibrarianGuard } from 'src/app/guards/librarian.guard';
 
 const routes: Routes = [
   { path: '', component: BibliographysListComponent },
   { path: 'bibliography-info/:id', component: BibliographyInfoComponent },
-  { path: 'bibliography-create', component: BibliographyCreateComponent },
-  { path: ':id/edit', component: BibliographyEditComponent },
+  {
+    path: 'bibliography-create',
+    component: BibliographyCreateComponent,
+    canActivate: [LibrarianGuard],
+  },
+  {
+    path: ':id/edit',
+    component: BibliographyEditComponent,
+    canActivate: [LibrarianGuard],
+  },
 ];
 
 @NgModule({

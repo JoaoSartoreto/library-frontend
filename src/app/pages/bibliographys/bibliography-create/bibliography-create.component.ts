@@ -1,31 +1,26 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, catchError } from 'rxjs';
 import { BibliographysService } from '../bibliographys.service';
 import { MessagesService } from 'src/app/message/messages.service';
-import {
-  Bibliography,
-  BibliographyDto,
-} from 'src/app/models/bibliography.model';
+import { Router } from '@angular/router';
+import { BibliographyDto } from 'src/app/models/bibliography.model';
 
 @Component({
-  selector: 'app-bibliographys-edit',
-  templateUrl: './bibliographys-edit.component.html',
-  styleUrls: ['./bibliographys-edit.component.scss'],
+  selector: 'app-bibliography-create',
+  templateUrl: './bibliography-create.component.html',
+  styleUrls: ['./bibliography-create.component.scss'],
 })
-export class BibliographysEditComponent implements OnInit, OnDestroy {
+export class BibliographyCreateComponent implements OnInit, OnDestroy {
   form: FormGroup = new FormGroup({});
   desabilitar: boolean = true;
   subscription: Subscription[] = [];
-  bibliography!: Bibliography;
 
   constructor(
     private readonly fb: FormBuilder,
     private readonly bibliographysService: BibliographysService,
     private readonly messageService: MessagesService,
-    private readonly router: Router,
-    private readonly route: ActivatedRoute
+    private readonly router: Router
   ) {}
 
   ngOnInit() {
@@ -34,31 +29,6 @@ export class BibliographysEditComponent implements OnInit, OnDestroy {
       bookId: [null, [Validators.required]],
       bookIds: this.fb.array([]),
     });
-
-    const sub = this.route.params.subscribe((params: any) => {
-      const id = params['id'];
-
-      const sub = this.bibliographysService
-        .findById(id)
-        .subscribe((bibliography) => {
-          this.bibliography = bibliography;
-
-          this.form.patchValue({
-            description: this.bibliography.description,
-            bookId: this.bibliography.books[0].id,
-          });
-
-          if (this.bibliography.books && this.bibliography.books.length > 0) {
-            this.bibliography.books.slice(1).forEach((book) => {
-              this.addBookIdInput(book.id);
-            });
-          }
-        });
-
-      this.subscription.push(sub);
-    });
-
-    this.subscription.push(sub);
   }
 
   ngOnDestroy(): void {
@@ -77,15 +47,15 @@ export class BibliographysEditComponent implements OnInit, OnDestroy {
       const bibli: BibliographyDto = { description, bookIds };
 
       const sub = this.bibliographysService
-        .update(this.bibliography.id, bibli)
+        .create(bibli)
         .pipe(
           catchError((err) => {
-            this.messageService.error('Bibliografia não pode ser atualizada!');
+            this.messageService.error('Bibliografia não pode ser cadastrada!');
             return err;
           })
         )
         .subscribe((resp) => {
-          this.messageService.success('Bibliografia atualizado com sucesso!');
+          this.messageService.success('Bibliografia cadastrada com sucesso!');
           this.router.navigate(['/bibliographys']);
         });
 
@@ -100,8 +70,8 @@ export class BibliographysEditComponent implements OnInit, OnDestroy {
   }
 
   // Método para adicionar um novo input de ID de livro
-  addBookIdInput(bookId: string = ''): void {
-    this.bookIdsFormArray.push(this.fb.control(bookId));
+  addBookIdInput(): void {
+    this.bookIdsFormArray.push(this.fb.control(''));
   }
 
   // Método para remover um input de ID de livro específico

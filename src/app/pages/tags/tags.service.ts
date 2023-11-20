@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ResponseDataList } from 'src/app/models/shared.model';
 import { environment } from 'src/environments/environment';
-import { Tag } from '../models/tag.model';
+import { Tag } from '../../models/tag.model';
 
 @Injectable({
   providedIn: 'root',

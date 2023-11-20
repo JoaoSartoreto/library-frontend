@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BibliographysService } from '../bibliographys.service';
+import { TagsService } from '../tags.service';
 import { Subject, Subscription } from 'rxjs';
-import { Bibliography } from 'src/app/models/bibliography.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { Book } from 'src/app/models/book.model';
+import { Tag } from 'src/app/models/tag.model';
 
 @Component({
-  selector: 'app-bibliographys-info',
-  templateUrl: './bibliographys-info.component.html',
-  styleUrls: ['./bibliographys-info.component.scss'],
+  selector: 'app-tag-info',
+  templateUrl: './tag-info.component.html',
+  styleUrls: ['./tag-info.component.scss'],
 })
-export class BibliographysInfoComponent implements OnInit, OnDestroy {
+export class TagInfoComponent implements OnInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   data: Book[] = [];
@@ -19,11 +19,11 @@ export class BibliographysInfoComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
   displayedColumns: string[] = ['id', 'title', 'year', 'edition'];
   refresh: Subject<boolean> = new Subject();
-  bibliography: Bibliography | null = null;
+  tag: Tag | null = null;
 
   constructor(
     private readonly router: Router,
-    private readonly bibliographysService: BibliographysService,
+    private readonly tagsService: TagsService,
     private readonly route: ActivatedRoute
   ) {}
 
@@ -31,13 +31,11 @@ export class BibliographysInfoComponent implements OnInit, OnDestroy {
     const sub1 = this.route.params.subscribe((params: any) => {
       const id = params['id'];
 
-      const sub = this.bibliographysService
-        .findById(id)
-        .subscribe((bibliography) => {
-          this.bibliography = bibliography;
-          this.data = this.bibliography.books;
-          this.resultsLength = this.data.length;
-        });
+      const sub = this.tagsService.findById(id).subscribe((tag) => {
+        this.tag = tag;
+        this.data = this.tag.books;
+        this.resultsLength = this.data.length;
+      });
 
       this.subscriptions.push(sub);
     });
@@ -50,6 +48,6 @@ export class BibliographysInfoComponent implements OnInit, OnDestroy {
   }
 
   voltar() {
-    this.router.navigate(['/bibliographys']);
+    this.router.navigate(['/tags']);
   }
 }

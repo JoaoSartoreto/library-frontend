@@ -2,16 +2,16 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription, catchError } from 'rxjs';
-import { TagsService } from '../../tags.service';
+import { TagsService } from '../tags.service';
 import { MessagesService } from 'src/app/message/messages.service';
 import { Tag } from 'src/app/models/tag.model';
 
 @Component({
-  selector: 'app-tags-edit',
-  templateUrl: './tags-edit.component.html',
-  styleUrls: ['./tags-edit.component.scss'],
+  selector: 'app-tag-edit',
+  templateUrl: './tag-edit.component.html',
+  styleUrls: ['./tag-edit.component.scss'],
 })
-export class TagsEditComponent implements OnInit, OnDestroy {
+export class TagEditComponent implements OnInit, OnDestroy {
   form: FormGroup = new FormGroup({});
   desabilitar: boolean = true;
   subscription: Subscription[] = [];

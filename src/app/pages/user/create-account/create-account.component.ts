@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CreateUser } from 'src/app/models/user.model';
-import { CriarContaService } from './criar-conta.service';
+import { CreateAccountService } from './create-account.service';
 import { Subscription, catchError } from 'rxjs';
 import { MessagesService } from 'src/app/message/messages.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-criar-conta',
-  templateUrl: './criar-conta.component.html',
-  styleUrls: ['./criar-conta.component.scss'],
+  selector: 'app-create-account',
+  templateUrl: './create-account.component.html',
+  styleUrls: ['./create-account.component.scss'],
 })
-export class CriarContaComponent implements OnInit, OnDestroy {
+export class CreateAccountComponent implements OnInit, OnDestroy {
   form: FormGroup = new FormGroup({});
   desabilitar: boolean = true;
   isChecked: boolean = false;
@@ -19,7 +19,7 @@ export class CriarContaComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly criarContaService: CriarContaService,
+    private readonly createAccountService: CreateAccountService,
     private readonly messageService: MessagesService,
     private readonly router: Router
   ) {}
@@ -48,7 +48,7 @@ export class CriarContaComponent implements OnInit, OnDestroy {
         isLibrarian: this.isChecked,
       };
 
-      const sub = this.criarContaService
+      const sub = this.createAccountService
         .create(user)
         .pipe(
           catchError((err) => {

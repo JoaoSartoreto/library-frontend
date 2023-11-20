@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root',
 })
-export class CriarContaService {
+export class CreateAccountService {
   baseAPI: string = '/users';
 
   constructor(private readonly http: HttpClient) {}

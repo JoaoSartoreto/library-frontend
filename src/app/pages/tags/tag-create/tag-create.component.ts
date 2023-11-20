@@ -1,16 +1,16 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, catchError } from 'rxjs';
-import { TagsService } from '../../tags.service';
+import { TagsService } from '../tags.service';
 import { MessagesService } from 'src/app/message/messages.service';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-tags-create',
-  templateUrl: './tags-create.component.html',
-  styleUrls: ['./tags-create.component.scss'],
+  selector: 'app-tag-create',
+  templateUrl: './tag-create.component.html',
+  styleUrls: ['./tag-create.component.scss'],
 })
-export class TagsCreateComponent implements OnInit, OnDestroy {
+export class TagCreateComponent implements OnInit, OnDestroy {
   form: FormGroup = new FormGroup({});
   desabilitar: boolean = true;
   subscription: Subscription[] = [];

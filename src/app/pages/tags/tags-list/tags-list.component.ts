@@ -23,7 +23,7 @@ import {
 } from 'rxjs';
 
 import { MessageComponent } from 'src/app/message/message.component';
-import { TagsService } from '../../tags.service';
+import { TagsService } from '../tags.service';
 import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/shared/authentication.service';
 import { MessagesService } from 'src/app/message/messages.service';

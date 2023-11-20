@@ -48,16 +48,4 @@ export class FinesService {
       { params }
     );
   }
-
-  public convertStringToDate(dateString: string): Date | null {
-    try {
-      const date = dayjs(dateString, 'DD/MM/YYYY');
-
-      if (!date.isValid()) return null;
-
-      return date.toDate();
-    } catch (error) {
-      return null; // Retorna null se a string não for uma data válida no formato DD/MM/YYYY
-    }
-  }
 }

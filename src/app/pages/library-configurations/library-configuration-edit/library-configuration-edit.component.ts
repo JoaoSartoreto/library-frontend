@@ -9,6 +9,7 @@ import {
   LibraryConfigurationDto,
 } from 'src/app/models/library-configuration.model';
 import { dateTimeTypeValidator } from 'src/app/validators/data.validator';
+import { DateConvertionsService } from 'src/app/shared/date-convertions.service';
 
 @Component({
   selector: 'app-library-configuration-edit',
@@ -24,6 +25,7 @@ export class LibraryConfigurationEditComponent implements OnInit, OnDestroy {
   constructor(
     private readonly fb: FormBuilder,
     private readonly libraryService: LibraryConfigurationsService,
+    private readonly dateService: DateConvertionsService,
     private readonly messageService: MessagesService,
     private readonly router: Router,
     private readonly route: ActivatedRoute
@@ -54,7 +56,7 @@ export class LibraryConfigurationEditComponent implements OnInit, OnDestroy {
         this.library = library;
 
         this.form.patchValue({
-          startingDate: this.libraryService.converterData(
+          startingDate: this.dateService.converterData(
             this.library.startingDate
           ),
           dailyFine: this.library.dailyFine,
@@ -77,7 +79,7 @@ export class LibraryConfigurationEditComponent implements OnInit, OnDestroy {
   salvar() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      const startingDate = this.libraryService
+      const startingDate = this.dateService
         .convertStringDtToDate(this.form.get('startingDate')?.value)
         ?.toString();
       const dailyFine = this.form.get('dailyFine')?.value;

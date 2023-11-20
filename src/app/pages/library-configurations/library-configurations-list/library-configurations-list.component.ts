@@ -29,6 +29,7 @@ import { User } from 'src/app/models/user.model';
 import { AuthenticationService } from 'src/app/shared/authentication.service';
 import { MessagesService } from 'src/app/message/messages.service';
 import { dateTypeValidator } from 'src/app/validators/data.validator';
+import { DateConvertionsService } from 'src/app/shared/date-convertions.service';
 
 @Component({
   selector: 'app-library-configurations-list',
@@ -60,6 +61,7 @@ export class LibraryConfigurationsListComponent
     private readonly router: Router,
     private readonly authService: AuthenticationService,
     private readonly libraryService: LibraryConfigurationsService,
+    private readonly dateService: DateConvertionsService,
     private readonly fb: FormBuilder,
     private readonly dialog: MatDialog,
     private readonly messageService: MessagesService
@@ -97,10 +99,10 @@ export class LibraryConfigurationsListComponent
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          const search1 = this.libraryService.convertStringToDate(
+          const search1 = this.dateService.convertStringToDate(
             this.form.get('search1')?.value
           );
-          const search2 = this.libraryService.convertStringToDate(
+          const search2 = this.dateService.convertStringToDate(
             this.form.get('search2')?.value
           );
           return this.libraryService

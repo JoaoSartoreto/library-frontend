@@ -6,6 +6,7 @@ import { MessagesService } from 'src/app/message/messages.service';
 import { Router } from '@angular/router';
 import { BorrowingDto } from 'src/app/models/borrowing.model';
 import { dateTimeTypeValidator } from 'src/app/validators/data.validator';
+import { DateConvertionsService } from 'src/app/shared/date-convertions.service';
 
 @Component({
   selector: 'app-borrowing-create',
@@ -20,6 +21,7 @@ export class BorrowingCreateComponent implements OnInit, OnDestroy {
   constructor(
     private readonly fb: FormBuilder,
     private readonly borrowingsService: BorrowingsService,
+    private readonly dateService: DateConvertionsService,
     private readonly messageService: MessagesService,
     private readonly router: Router
   ) {}
@@ -40,10 +42,10 @@ export class BorrowingCreateComponent implements OnInit, OnDestroy {
   salvar() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      const startDate = this.borrowingsService
+      const startDate = this.dateService
         .convertStringDtToDate(this.form.get('startDate')?.value)
         ?.toString();
-      const endDate = this.borrowingsService
+      const endDate = this.dateService
         .convertStringDtToDate(this.form.get('endDate')?.value)
         ?.toString();
       const email = this.form.get('email')?.value;

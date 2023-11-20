@@ -6,6 +6,7 @@ import { MessagesService } from 'src/app/message/messages.service';
 import { Router } from '@angular/router';
 import { LibraryConfigurationDto } from 'src/app/models/library-configuration.model';
 import { dateTimeTypeValidator } from 'src/app/validators/data.validator';
+import { DateConvertionsService } from 'src/app/shared/date-convertions.service';
 
 @Component({
   selector: 'app-library-configuration-create',
@@ -20,6 +21,7 @@ export class LibraryConfigurationCreateComponent implements OnInit, OnDestroy {
   constructor(
     private readonly fb: FormBuilder,
     private readonly libraryService: LibraryConfigurationsService,
+    private readonly dateService: DateConvertionsService,
     private readonly messageService: MessagesService,
     private readonly router: Router
   ) {}
@@ -50,7 +52,7 @@ export class LibraryConfigurationCreateComponent implements OnInit, OnDestroy {
   salvar() {
     this.form.markAllAsTouched();
     if (this.form.valid) {
-      const startingDate = this.libraryService
+      const startingDate = this.dateService
         .convertStringDtToDate(this.form.get('startingDate')?.value)
         ?.toString();
       const dailyFine = this.form.get('dailyFine')?.value;

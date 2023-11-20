@@ -36,11 +36,35 @@ export class BooksService {
   list(
     page: number,
     limit: number,
-    search?: string
+    title?: string,
+    language?: string,
+    year?: number,
+    authorName?: string,
+    tagName?: string,
+    categoryName?: string,
+    publisherName?: string
   ): Observable<ResponseDataList<Book>> {
     let params = new HttpParams().set('page', page).set('limit', limit);
-    if (search?.trim()) {
-      params = params.set('search', search.trim());
+    if (title?.trim()) {
+      params = params.set('title', title.trim());
+    }
+    if (language?.trim()) {
+      params = params.set('language', language.trim());
+    }
+    if (year) {
+      params = params.set('year', year);
+    }
+    if (authorName?.trim()) {
+      params = params.set('authorName', authorName.trim());
+    }
+    if (tagName?.trim()) {
+      params = params.set('tagName', tagName.trim());
+    }
+    if (categoryName?.trim()) {
+      params = params.set('categoryName', categoryName.trim());
+    }
+    if (publisherName?.trim()) {
+      params = params.set('publisherName', publisherName.trim());
     }
     return this.http.get<ResponseDataList<Book>>(
       environment.baseUrl + this.baseApi,

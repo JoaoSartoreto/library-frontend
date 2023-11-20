@@ -4,14 +4,80 @@
 
 <div class="container-table mat-elevation-z4">
   <form [formGroup]="form">
-    <mat-form-field appearance="outline" class="search-input">
-      <mat-label>Pesquisar</mat-label>
+    <mat-form-field appearance="outline" class="search-input1">
+      <mat-label>Pesquisar por titulo</mat-label>
       <input
-        type="search"
+        type="title"
         matInput
-        name="search"
+        name="title"
         placeholder="Digite um titulo para pesquisar"
-        formControlName="search"
+        formControlName="title"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>Pesquisar por idioma</mat-label>
+      <input
+        type="language"
+        matInput
+        name="language"
+        placeholder="Digite um idioma para pesquisar"
+        formControlName="language"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>Pesquisar por ano</mat-label>
+      <input
+        type="year"
+        matInput
+        name="year"
+        placeholder="Digite um ano para pesquisar"
+        formControlName="year"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>Pesquisar por autor</mat-label>
+      <input
+        type="authorName"
+        matInput
+        name="authorName"
+        placeholder="Digite um autor para pesquisar"
+        formControlName="authorName"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>Pesquisar por tag</mat-label>
+      <input
+        type="tagName"
+        matInput
+        name="tagName"
+        placeholder="Digite uma tag para pesquisar"
+        formControlName="tagName"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>Pesquisar por categoria</mat-label>
+      <input
+        type="categoryName"
+        matInput
+        name="categoryName"
+        placeholder="Digite uma categoria para pesquisar"
+        formControlName="categoryName"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="search-input">
+      <mat-label>Pesquisar por editora</mat-label>
+      <input
+        type="publisherName"
+        matInput
+        name="publisherName"
+        placeholder="Digite uma editora para pesquisar"
+        formControlName="publisherName"
       />
     </mat-form-field>
   </form>

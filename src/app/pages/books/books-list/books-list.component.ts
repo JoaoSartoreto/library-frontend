@@ -66,17 +66,77 @@ export class BooksListComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit() {
     this.user = this.authService.getCurrentUserValue();
     this.form = this.fb.group({
-      search: [],
+      title: [],
+      language: [],
+      year: [],
+      authorName: [],
+      tagName: [],
+      categoryName: [],
+      publisherName: [],
     });
 
-    const sub = this.form
-      .get('search')!
+    const sub1 = this.form
+      .get('title')!
       .valueChanges.pipe(distinctUntilChanged(), debounceTime(150))
       .subscribe(() => {
         this.paginator.firstPage();
         this.refresh.next(true);
       });
-    this.subscriptions.push(sub);
+    this.subscriptions.push(sub1);
+
+    const sub2 = this.form
+      .get('language')!
+      .valueChanges.pipe(distinctUntilChanged(), debounceTime(150))
+      .subscribe(() => {
+        this.paginator.firstPage();
+        this.refresh.next(true);
+      });
+    this.subscriptions.push(sub2);
+
+    const sub3 = this.form
+      .get('year')!
+      .valueChanges.pipe(distinctUntilChanged(), debounceTime(150))
+      .subscribe(() => {
+        this.paginator.firstPage();
+        this.refresh.next(true);
+      });
+    this.subscriptions.push(sub3);
+
+    const sub4 = this.form
+      .get('authorName')!
+      .valueChanges.pipe(distinctUntilChanged(), debounceTime(150))
+      .subscribe(() => {
+        this.paginator.firstPage();
+        this.refresh.next(true);
+      });
+    this.subscriptions.push(sub4);
+
+    const sub5 = this.form
+      .get('tagName')!
+      .valueChanges.pipe(distinctUntilChanged(), debounceTime(150))
+      .subscribe(() => {
+        this.paginator.firstPage();
+        this.refresh.next(true);
+      });
+    this.subscriptions.push(sub5);
+
+    const sub6 = this.form
+      .get('categoryName')!
+      .valueChanges.pipe(distinctUntilChanged(), debounceTime(150))
+      .subscribe(() => {
+        this.paginator.firstPage();
+        this.refresh.next(true);
+      });
+    this.subscriptions.push(sub6);
+
+    const sub7 = this.form
+      .get('publisherName')!
+      .valueChanges.pipe(distinctUntilChanged(), debounceTime(150))
+      .subscribe(() => {
+        this.paginator.firstPage();
+        this.refresh.next(true);
+      });
+    this.subscriptions.push(sub7);
   }
 
   ngAfterViewInit(): void {
@@ -85,9 +145,26 @@ export class BooksListComponent implements OnInit, AfterViewInit, OnDestroy {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          const search = this.form.get('search')?.value;
+          const title = this.form.get('title')?.value;
+          const language = this.form.get('language')?.value;
+          const year = this.form.get('year')?.value;
+          const authorName = this.form.get('authorName')?.value;
+          const tagName = this.form.get('tagName')?.value;
+          const categoryName = this.form.get('categoryName')?.value;
+          const publisherName = this.form.get('publisherName')?.value;
+
           return this.booksService
-            .list(this.paginator.pageIndex + 1, this.paginator.pageSize, search)
+            .list(
+              this.paginator.pageIndex + 1,
+              this.paginator.pageSize,
+              title,
+              language,
+              year,
+              authorName,
+              tagName,
+              categoryName,
+              publisherName
+            )
             .pipe(catchError(() => of(null)));
         }),
         map((data) => {

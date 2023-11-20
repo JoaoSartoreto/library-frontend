@@ -5,6 +5,7 @@ import { PageComponent } from './layout/page/page.component';
 import { AuthenticationGuard } from './guards/authentication.guard';
 import { HomeComponent } from './pages/user/home/home.component';
 import { CreateAccountComponent } from './pages/user/create-account/create-account.component';
+import { LibrarianGuard } from './guards/librarian.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -85,6 +86,7 @@ const routes: Routes = [
           import(
             './pages/library-configurations/library-configuration-routing.module'
           ).then((m) => m.LibraryConfigurationRoutingModule),
+        canActivate: [LibrarianGuard],
       },
     ],
   },

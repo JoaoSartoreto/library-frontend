@@ -35,6 +35,9 @@ import { ReserveEditComponent } from './pages/reserves/reserve-edit/reserve-edit
 import { BorrowingsListComponent } from './pages/borrowings/borrowings-list/borrowings-list.component';
 import { BorrowingCreateComponent } from './pages/borrowings/borrowing-create/borrowing-create.component';
 import { FinesListComponent } from './pages/fines/fines-list/fines-list.component';
+import { LibraryConfigurationsListComponent } from './pages/library-configurations/library-configurations-list/library-configurations-list.component';
+import { LibraryConfigurationCreateComponent } from './pages/library-configurations/library-configuration-create/library-configuration-create.component';
+import { LibraryConfigurationEditComponent } from './pages/library-configurations/library-configuration-edit/library-configuration-edit.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -130,6 +133,17 @@ const routes: Routes = [
       {
         path: 'fines',
         children: [{ path: '', component: FinesListComponent }],
+      },
+      {
+        path: 'library-configurations',
+        children: [
+          { path: '', component: LibraryConfigurationsListComponent },
+          {
+            path: 'library-configuration-create',
+            component: LibraryConfigurationCreateComponent,
+          },
+          { path: ':id/edit', component: LibraryConfigurationEditComponent },
+        ],
       },
     ],
   },

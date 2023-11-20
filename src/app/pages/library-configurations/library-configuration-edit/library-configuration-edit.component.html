@@ -1,0 +1,94 @@
+<mat-card class="home mat-elevation-z3">
+    <mat-card-title class="title">
+        <strong>Cadastro de Reserva</strong>
+    </mat-card-title>
+
+    <form [formGroup]="form">
+        <mat-form-field appearance="outline">
+            <mat-label>Data inicio</mat-label>
+            <input
+                matInput
+                name="startingDate"
+                placeholder="Data inicio"
+                formControlName="startingDate"
+            />
+            <mat-error *ngIf="form.get('startingDate')?.hasError('required')">
+                Campo obrigatório
+            </mat-error>
+            <mat-error *ngIf="form.get('startingDate')?.hasError('invalidDateTime')">
+                Data: (DD/MM/YYYY HH:mm)
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Valor diario</mat-label>
+            <input
+                matInput
+                name="dailyFine"
+                placeholder="Valor diario"
+                formControlName="dailyFine"
+            />
+            <mat-error *ngIf="form.get('dailyFine')?.hasError('required')">
+                Campo obrigatório
+            </mat-error>
+            <mat-error *ngIf="form.get('dailyFine')?.hasError('pattern')">
+                Campo deve ser um numero
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Maximo de empréstimos por usuario</mat-label>
+            <input
+                matInput
+                name="maxBorrowedBooksByUser"
+                placeholder="Maximo de empréstimos por usuario"
+                formControlName="maxBorrowedBooksByUser"
+            />
+            <mat-error *ngIf="form.get('maxBorrowedBooksByUser')?.hasError('required')">
+                Campo obrigatório
+            </mat-error>
+            <mat-error *ngIf="form.get('maxBorrowedBooksByUser')?.hasError('pattern')">
+                Campo deve ser um numero
+            </mat-error>
+        </mat-form-field>
+
+         <mat-form-field appearance="outline">
+            <mat-label>Duração maxima de empréstimos</mat-label>
+            <input
+                matInput
+                name="maxBorrowingDurationDays"
+                placeholder="Duração maxima de empréstimos"
+                formControlName="maxBorrowingDurationDays"
+            />
+            <mat-error *ngIf="form.get('maxBorrowingDurationDays')?.hasError('required')">
+                Campo obrigatório
+            </mat-error>
+            <mat-error *ngIf="form.get('maxBorrowingDurationDays')?.hasError('pattern')">
+                Campo deve ser um numero
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+            <mat-label>Maximo de reservas por usuário</mat-label>
+            <input
+                matInput
+                name="maxReservesByUser"
+                placeholder="Maximo de reservas por usuário"
+                formControlName="maxReservesByUser"
+            />
+            <mat-error *ngIf="form.get('maxReservesByUser')?.hasError('required')">
+                Campo obrigatório
+            </mat-error>
+            <mat-error *ngIf="form.get('maxReservesByUser')?.hasError('pattern')">
+                Campo deve ser um numero
+            </mat-error>
+        </mat-form-field>
+
+  </form>
+
+    <div class="botoes">
+        <button mat-raised-button (click)="salvar()" color="primary">Salvar</button>
+        <button mat-raised-button (click)="cancelar()" color="warn">Cancelar</button>
+    </div>  
+
+</mat-card>

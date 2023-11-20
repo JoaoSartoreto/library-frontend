@@ -66,9 +66,9 @@ export class ReserveCreateComponent implements OnInit, OnDestroy {
             this.router.navigate(['/reserves']);
           });
         this.subscription.push(sub);
-      } else {
-        this.messageService.error('Há campos inválidos no formulário!');
       }
+    } else {
+      this.messageService.error('Há campos inválidos no formulário!');
     }
   }
 

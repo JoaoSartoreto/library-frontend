@@ -38,8 +38,6 @@ export class ReserveEditComponent implements OnInit, OnDestroy {
 
       const sub = this.reservesService.findById(id).subscribe((reserve) => {
         this.reserve = reserve;
-        console.log(this.reserve.startDate);
-        console.log(this.reserve.endDate);
 
         this.form.patchValue({
           startDate: this.reservesService.converterData(this.reserve.startDate),

@@ -74,7 +74,7 @@ export class ReserveEditComponent implements OnInit, OnDestroy {
           bookId,
         };
         const sub = this.reservesService
-          .create(reserve)
+          .update(this.reserve.id, reserve)
           .pipe(
             catchError((err) => {
               this.messageService.error('Reserva não pode ser atualizada!');
